@@ -19,25 +19,6 @@ If you are developing a production application, we recommend using TypeScript wi
 
 You can run the application using Docker and Docker Compose.
 
-### Prerequisites
-
-- Docker
-- Docker Compose
-
-### Steps
-
-1.  **Build and start the container:**
-
-    ```bash
-    docker compose up --build
-    ```
-
-2.  **Access the application:**
-
-    Open your browser and navigate to `http://localhost:5173`.
-
-The container is configured with volume mounting, so changes to your local files will be reflected in the running application (HMR).
-
 ## License
 
 This project is licensed under the GNU Affero General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
