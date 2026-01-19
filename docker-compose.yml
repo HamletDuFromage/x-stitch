@@ -5,3 +5,4 @@ services:
       - "5173:5173"
     environment:
       - NODE_ENV=production
+      #- VITE_ALLOWED_HOSTS=
