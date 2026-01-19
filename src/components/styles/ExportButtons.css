@@ -1,0 +1,82 @@
+.export-buttons {
+    background: var(--color-surface);
+    padding: var(--space-lg);
+    border-radius: 16px 20px 18px 22px;
+    /* Irregular */
+    border: 3px solid var(--color-accent);
+    transition: all var(--transition-base);
+}
+
+.export-buttons:hover {
+    border-color: var(--color-primary);
+}
+
+.export-buttons h3 {
+    font-size: var(--font-size-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.button-group {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 18px 22px 20px 24px;
+    /* Irregular */
+    font-weight: var(--font-weight-medium);
+    border: 3px solid;
+    box-shadow: none;
+    transition: all var(--transition-base);
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+    position: relative;
+}
+
+.json-btn {
+    background: var(--color-emerald);
+    border-color: var(--color-sapphire);
+    color: white;
+    transform: rotate(-1deg);
+}
+
+.json-btn:hover {
+    background: var(--color-sapphire);
+    border-color: var(--color-emerald);
+    transform: rotate(1deg) scale(1.05);
+}
+
+.import-btn {
+    background: var(--color-accent);
+    border-color: var(--color-secondary);
+    color: white;
+    cursor: pointer;
+    transform: rotate(1deg);
+}
+
+.import-btn:hover {
+    background: var(--color-secondary);
+    border-color: var(--color-accent);
+    transform: rotate(-1deg) scale(1.05);
+}
+
+.export-btn:active {
+    transform: rotate(0deg) scale(0.98);
+}
+
+.export-btn svg {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+}
+
+.export-btn:hover svg {
+    transform: rotate(10deg);
+}

@@ -1,0 +1,189 @@
+.pattern-canvas-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.canvas-wrapper {
+    background: var(--color-surface);
+    padding: var(--space-xl);
+    border-radius: 15px 20px 18px 22px;
+    /* Irregular, organic feel */
+    border: 4px solid var(--color-primary);
+    box-shadow: none;
+    overflow: hidden;
+    /* Prevent scrollbars in fit mode */
+    max-width: 100%;
+    max-height: 85vh;
+    /* Increased from 70vh */
+    transition: all var(--transition-base);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas-wrapper.zoomed {
+    overflow: auto;
+    /* Allow scrolling in zoomed mode */
+    display: block;
+    /* Normal block layout for scrolling */
+    aspect-ratio: 1 / 1;
+    /* Ensure the window is square */
+    width: min(100%, 85vh);
+    /* Match the height constraint */
+}
+
+/* Woven fabric texture */
+.canvas-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 71, 137, 0.02) 1px,
+            rgba(139, 71, 137, 0.02) 2px),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 71, 137, 0.02) 1px,
+            rgba(139, 71, 137, 0.02) 2px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.canvas-wrapper>canvas {
+    position: relative;
+    z-index: 10;
+    /* Ensure it's above the texture overlay */
+    pointer-events: auto;
+}
+
+.canvas-wrapper:hover {
+    border-color: var(--color-secondary);
+}
+
+.pattern-canvas {
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border-radius: var(--radius-sm);
+    max-width: 100%;
+    max-height: calc(85vh - 2 * var(--space-xl));
+    /* Updated to match 85vh */
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.zoomed .pattern-canvas {
+    max-width: none;
+    max-height: none;
+}
+
+.zoom-toggle {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.zoom-toggle:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+.zoom-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background: var(--color-primary);
+    color: white;
+    border-radius: 20px 25px 22px 28px;
+    /* Irregular, hand-drawn feel */
+    font-weight: var(--font-weight-semibold);
+    border: 3px solid var(--color-accent);
+    box-shadow: none;
+    transition: all var(--transition-base);
+    position: relative;
+    transform: rotate(-1deg);
+    overflow: hidden;
+}
+
+/* Stitched texture */
+.download-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 4px,
+            rgba(255, 255, 255, 0.05) 4px,
+            rgba(255, 255, 255, 0.05) 8px);
+    pointer-events: none;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px 25px 22px 28px;
+    border: 2px dotted var(--color-secondary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 1;
+}
+
+.download-btn:hover {
+    transform: rotate(1deg) scale(1.05);
+    background: var(--color-secondary);
+    border-color: var(--color-primary);
+}
+
+.download-btn:hover::before {
+    opacity: 1;
+}
+
+.download-btn:active {
+    transform: rotate(0deg) scale(0.98);
+}
+
+.download-btn svg {
+    transition: transform var(--transition-base);
+    position: relative;
+    z-index: 2;
+}
+
+.download-btn:hover svg {
+    transform: translateY(3px) rotate(5deg);
+}
