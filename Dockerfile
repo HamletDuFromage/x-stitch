@@ -1,20 +1,21 @@
-# Use node:20-slim as the base image
-FROM node:20-slim
+# Build stage
+FROM node:20-slim AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
+RUN npm run build
 
-# Expose port 5173 (default Vite port)
-EXPOSE 5173
+# Production stage
+FROM nginx:stable-alpine
 
-# Run the development server
-CMD ["npm", "run", "dev", "--", "--host"]
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
